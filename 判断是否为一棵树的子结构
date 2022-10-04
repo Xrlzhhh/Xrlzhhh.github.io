@@ -1,0 +1,11 @@
+class Solution {
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        return (A!=null && B!=null)&&(rec(A,B)||isSubStructure(A.left,B)||isSubStructure(A.right,B));
+    }
+    public boolean rec(TreeNode a , TreeNode b){
+        if (b==null) return true;
+        if (a==null || a.val!=b.val) return false;
+        boolean result = rec(a.left,b.left)&&rec(a.right,b.right);
+        return result;
+    }
+}
