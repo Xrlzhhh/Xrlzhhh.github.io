@@ -1,31 +1,33 @@
-package 算法题;
+package ACMCodePattern;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Main1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String str = "I like beijing.";
-        ArrayList<String> arrayList = new ArrayList<>();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            if (ch!=' '){
-                stringBuilder.append(ch);
+        int n = scanner.nextInt();
+        int[] arr = new int[n+1];
+        for (int i = 0; i < n; i++) {
+            arr[i]=scanner.nextInt();
+        }
+        int count = 0;
+        int i = 0;
+        while (i<n){
+            if (arr[i]<arr[i+1]){
+                while (i<n && arr[i]<arr[i+1]){
+                    i++;
+                }
+                i++;
+                count++;
+            }else if (arr[i]==arr[i+1]){
+                i++;
             }else {
-                arrayList.add(stringBuilder.toString());
-                stringBuilder.delete(0,stringBuilder.length());
+                while (i<n && arr[i]>arr[i+1]){
+                    i++;
+                }
+                i++;
+                count++;
             }
         }
-        arrayList.add(stringBuilder.toString());
-        StringBuilder result = new StringBuilder();
-        for (int i = arrayList.size()-1; i >=0 ; i--) {
-            result.append(arrayList.get(i));
-            result.append(' ');
-        }
-        result.deleteCharAt(result.length()-1);
-        System.out.println(result.toString());
-
+        System.out.println(count);
     }
 }

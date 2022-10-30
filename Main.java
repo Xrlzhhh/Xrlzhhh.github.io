@@ -1,37 +1,39 @@
-package 算法题;
+package ACMCodePattern;
 
 import java.util.Scanner;
-//126987
+
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int[] arr = new int[n];
-        for (int i = 0; i <n ; i++) {
-            arr[i]=scanner.nextInt();
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String[] arrays = new String[n];
+        for (int i = 0; i < n; i++) {
+            arrays[i]=sc.next();
         }
-        int result = 0;
-        int slow = 0;
-        int fast = 1;
-        int flag = 0;//0代表相等 1代表递增 -1代表递减
-        for (int j=1;j<arr.length;j++){
-            if (arr[j]>arr[j-1]){
-                if (flag==0) flag=1;
-                else if (flag==-1){
-                    flag=0;
-                    result++;
-                }
-            }
-            if (arr[j]<arr[j-1]){
-                if (flag==0) flag=-1;
-                else if (flag==1){
-                    flag=0;
-                    result++;
-                }
+        if (isSorten1(arrays)&&isSorted2(arrays)){
+            System.out.println("both");
+        }else if (isSorten1(arrays)){
+            System.out.println("lexicographically");
+        }else if (isSorted2(arrays)){
+            System.out.println("lengths");
+        }else {
+            System.out.println("none");
+        }
+    }
+    public static boolean isSorten1(String[] arrays){
+        for (int i = 0; i < arrays.length-1; i++) {
+            if (arrays[i].compareTo(arrays[i+1])>0){
+                return false;
             }
         }
-        result++;
-        System.out.println(result);
-
+        return true;
+    }
+    public static boolean isSorted2(String[] arrays){
+        for (int i = 0; i < arrays.length-1; i++) {
+            if (arrays[i].length()>arrays[i+1].length()){
+                return false;
+            }
+        }
+        return true;
     }
 }
